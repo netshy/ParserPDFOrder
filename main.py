@@ -63,7 +63,17 @@ def take_name_file():
         return item
 
 
+def make_folders():
+    if not os.path.isdir("load"):
+        os.mkdir("load")
+    if not os.path.isdir("result"):
+        os.mkdir("result")
+    if not os.path.isdir("trash"):
+        os.mkdir("trash")
+
+
 def main():
+    make_folders()
     while True:
         try:
             if valid_file() is True:
