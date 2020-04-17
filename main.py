@@ -46,7 +46,7 @@ def take_order_number(pdf_text):
             return number
 
 
-def valid_file():
+def validate_file():
     file_name = take_name_file()
     if file_name is not None:
         pdf_text = convert_pdf_to_txt(LOAD_DIR + '/' + file_name)
@@ -55,6 +55,7 @@ def valid_file():
             if result.startswith('ПЛАТЕЖНОЕ'):
                 return True
         shutil.move(LOAD_DIR + '/' + file_name, TRASH_DIR + '/' + file_name)
+        print(f'Файл {file_name} не имеет номера платежного поручения. Файл перенесен в папку trash.')
 
 
 def take_name_file():
@@ -76,7 +77,7 @@ def main():
     make_folders()
     while True:
         try:
-            if valid_file() is True:
+            if validate_file() is True:
                 file_name = take_name_file()
                 pdf_text = convert_pdf_to_txt(LOAD_DIR + '/' + file_name)
                 result = take_order_number(pdf_text)
@@ -84,7 +85,7 @@ def main():
                 new_file = os.path.join(RESULT_DIR, result + '.pdf')
                 os.rename(old_file, new_file)
             if not take_name_file():
-                return print('В папке нет файлов.')
+                return print('В папке нет файлов. Загрузи в папку load платежные поручения в формате PDF.')
 
         except KeyboardInterrupt:
             print('Прерывание с клавиатуры')
