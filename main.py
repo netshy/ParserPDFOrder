@@ -55,7 +55,8 @@ def validate_file():
             if result.startswith('ПЛАТЕЖНОЕ'):
                 return True
         shutil.move(LOAD_DIR + '/' + file_name, TRASH_DIR + '/' + file_name)
-        print(f'Файл {file_name} не имеет номера платежного поручения. Файл перенесен в папку trash.')
+        print(f'{time.asctime()}: Файл "{file_name}" не имеет номера платежного поручения. '
+              f'Файл перенесен в папку trash.')
 
 
 def take_name_file():
@@ -76,25 +77,31 @@ def make_folders():
 def main():
     make_folders()
     while True:
+        file_name = take_name_file()
         try:
             if validate_file() is True:
-                file_name = take_name_file()
                 pdf_text = convert_pdf_to_txt(LOAD_DIR + '/' + file_name)
                 result = take_order_number(pdf_text)
                 old_file = os.path.join(LOAD_DIR, file_name)
                 new_file = os.path.join(RESULT_DIR, result + '.pdf')
                 os.rename(old_file, new_file)
+                print(f'{time.asctime()}: "{file_name}" переименован')
             if not take_name_file():
-                return print('В папке нет файлов. Загрузи в папку load платежные поручения в формате PDF.')
+                return print(f'{time.asctime()}: В папке нет файлов. '
+                             f'\nЗагрузи в папку load платежные поручения в формате PDF.')
 
         except KeyboardInterrupt:
             print('Прерывание с клавиатуры')
             sys.exit()
+        except FileExistsError:
+            return print(f'{time.asctime()}: Скрипт выключен.'
+                         f' Ошибка уникальности названия "{file_name}".'
+                         f'\nВозможно в папке result уже есть такой же файл.')
         except PDFSyntaxError:
-            return print('Ошибка типа файла. Вы уверены, что в папке верный тип файла?')
+            return print(f'{time.asctime()}: Скрипт выключен. Ошибка типа файла.'
+                         f'Вы уверены, что у файла "{file_name}" верный тип?')
         except Exception as e:
-            print(f'Ошибка во время выполнения задания: {e}')
-            time.sleep(30)
+            return print(f'{time.asctime()}: Скрипт выключен. Ошибка во время выполнения задания: {e}')
 
 
 if __name__ == '__main__':
