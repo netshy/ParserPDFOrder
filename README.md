@@ -27,4 +27,4 @@ $ python main.py
 2. result - здесь хранятся переименованные файлы.
 3. trash - сюда попадают файлы, которые не удалось переименовать.
 
-![Наглядный пример](https://i.ibb.co/G74GWMW/demo.gif)
+![Наглядный пример](https://i.ibb.co/yykhtF1/demo-min.gif)
