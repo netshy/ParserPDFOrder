@@ -27,4 +27,8 @@ $ python main.py
 2. `result` - здесь хранятся переименованные файлы.
 3. `trash` - сюда попадают файлы, которые не удалось переименовать.
 
-<a href="https://i.ibb.co/yykhtF1/demo-min.gif"><img src="https://i.ibb.co/yykhtF1/demo-min.gif" title="Наглядный пример"/></a>
+## GUI
+
+В папке с одноименным названием есть маленькая реализация gui. Работает по тому же принципу, как и основной скрипт.
+
+<a href="https://i.ibb.co/yykhtF1/demo-min.gif"><img src="https://i.ibb.co/yykhtF1/demo-min.gif" title="Наглядный пример (ссылка работает)"/></a>
