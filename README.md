@@ -31,4 +31,4 @@ $ python main.py
 
 В папке с одноименным названием есть маленькая реализация gui. Работает по тому же принципу, как и основной скрипт.
 
-<a href="https://i.ibb.co/yykhtF1/demo-min.gif"><img src="https://i.ibb.co/yykhtF1/demo-min.gif" title="Наглядный пример (ссылка работает)"/></a>
+![Демонстрация работы](GUI/demo-min.gif)
